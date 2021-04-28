@@ -1,0 +1,58 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+		},	
+		{
+			"path": "pages/memorial_hall/memorial_hall",
+			"style": {
+				"navigationBarTitleText": "纪念馆",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/personalCenter/personalCenter",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	    ,{
+            "path" : "pages/attention/attention",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "关注的纪念馆",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/lucky_star/lucky_star",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "福星",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+		{
+			"path": "pages/auth/auth",
+			"style": {
+				"navigationBarTitleText": "授权登录",
+				"enablePullDownRefresh": false
+			}
+		
+		}
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF"
+	}
+}
