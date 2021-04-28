@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/memorial_hall/memorial_hall",
+    "pages/personalCenter/personalCenter",
+    "pages/attention/attention",
+    "pages/lucky_star/lucky_star",
+    "pages/auth/auth"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF"
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

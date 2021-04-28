@@ -1,0 +1,1 @@
+<view><view class="headView"><view class="headImageView"></view><view class="titleText">申请获取以下权限</view><view class="contentText">获得您的公开信息(昵称,头像,手机等)</view><button class="authBtn" type="primary" open-type="getUserProfile" data-event-opts="{{[['tap',[['bindGetUserInfo',['$event']]]]]}}" bindtap="__e">授权登录</button></view></view>

@@ -1,0 +1,35 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/personalCenter/personalCenter",
+          "pathName": "pages/personalCenter/personalCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/lucky_star/lucky_star",
+          "pathName": "pages/lucky_star/lucky_star",
+          "scene": null
+        }
+      ]
+    }
+  }
+}
