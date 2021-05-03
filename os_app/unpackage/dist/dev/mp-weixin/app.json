@@ -5,7 +5,9 @@
     "pages/personalCenter/personalCenter",
     "pages/attention/attention",
     "pages/lucky_star/lucky_star",
-    "pages/auth/auth"
+    "pages/auth/auth",
+    "pages/grief_home/grief_home",
+    "pages/pensive_home/pensive_home"
   ],
   "subPackages": [],
   "window": {
@@ -13,6 +15,5 @@
     "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#FFFFFF"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

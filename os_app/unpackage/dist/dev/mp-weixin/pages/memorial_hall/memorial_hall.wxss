@@ -45,7 +45,7 @@
 .memorial_hall_home .memorial_header_input .input_icon,
 .memorial_hall_home .memorial_header_input .input_btn {
   height: 70rpx;
-  top: 50%;
+  top: 54%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   position: absolute;

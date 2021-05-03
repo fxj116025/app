@@ -26,7 +26,7 @@ function getRequest(url, data) {
 					resolve(res.data);
 				} else {
 					uni.showToast({
-						title: res.data.msg,
+						title: res.data.msg||'请求失败',
 						icon: 'none',
 						duration: 2000
 					})
@@ -63,7 +63,7 @@ function postRequest(url, data) {
 					resolve(res.data);
 				}else{
 					uni.showToast({
-						title: res.data.msg,
+						title: res.data.msg||'请求失败',
 						icon: 'none',
 						duration: 2000
 					})

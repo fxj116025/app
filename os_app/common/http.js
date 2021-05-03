@@ -32,9 +32,15 @@ function notice(data, callback){
 	})
 }
 
+// 首页纪念馆
+function home_memorials(data, callback) {
+	postRequest('/index/memorial', data).then((res) => {
+		callback(res)
+	})
+}
 // 个人中心用户信息
 function userInfo(data,callback){
-	postRequest('/user/staticDetail', data).then((res) => {
+	postRequest('/user/personalInfo', data).then((res) => {
 		callback(res)
 	})
 }
@@ -49,5 +55,6 @@ export {
 	login,
 	home_swiper,
 	notice,
+	home_memorials,
 	userInfo
 }

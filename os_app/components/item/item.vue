@@ -1,35 +1,35 @@
 <template>
-	<view class="item">
+	<view class="item" @click="grief_home">
 		<view class="item_left">
-			<image src="../../static/images/imhg.jpeg" mode="aspectFill" lazy-load='true' />
+			<image :src="obj.gone_user_avatar" mode="aspectFill" lazy-load='true' />
 		</view>
 		<view class="item_right">
 			<view class="item_right_name">
-				名字
+				{{obj.gone_user_name}}
 			</view>
 			<view class="item_right_time">
-				2000.20.20~2100.90.90
+				{{obj.gone_user_years}}
 			</view>
 			<view class="item_right_num">
-				<image src="../../static/images/imhg.jpeg" mode="scaleToFill"/>
+				<image src="../../static/images/jx_num.png" mode="scaleToFill"/>
 				<view>
 					敬香数：
 				</view>
 				<view>
-					10000000000000
+					{{obj.action.jx}}
 				</view>
 			</view>
 			<view class="item_right_num">
-				<image src="../../static/images/imhg.jpeg" mode="scaleToFill"/>
+				<image src="../../static/images/gz_num.png" mode="scaleToFill"/>
 				<view>
 					关注数：
 				</view>
 				<view>
-					10000000000000
+					{{obj.action.gz}}
 				</view>
 			</view>
 			<view class="item_right_num">
-				<image src="../../static/images/imhg.jpeg" mode="scaleToFill"/>
+				<image src="../../static/images/fb_iocn.png" mode="scaleToFill"/>
 				<view>
 					发表人：
 				</view>
@@ -48,6 +48,30 @@
 			return {
 
 			};
+		},
+		props:{
+			'obj':{
+				type:Object,
+				// required:true
+				default(){
+					return {
+						gone_user_avatar:'../../static/images/imhg.jpeg',
+						gone_user_name:'二u去哦i去',
+						gone_user_years:'1837.99.63~4749.66.66',
+						action:{
+							jx:1231,
+							gz:235423
+						}
+					}
+				}
+			}
+		},
+		methods:{
+			grief_home(){
+				uni.navigateTo({
+					url:'../../pages/grief_home/grief_home'
+				})
+			}
 		}
 	}
 </script>
@@ -59,7 +83,7 @@
 		align-items:center;
 		border-bottom: 1px solid #F5F5F5;
 		.item_left {
-			width: 200rpx;
+			width: 215rpx;
 			height: 280rpx;
 			flex-shrink: 0;
 			

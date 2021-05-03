@@ -27,6 +27,18 @@
         {
           "name": "pages/lucky_star/lucky_star",
           "pathName": "pages/lucky_star/lucky_star",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/grief_home/grief_home",
+          "pathName": "pages/grief_home/grief_home",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/pensive_home/pensive_home",
+          "pathName": "pages/pensive_home/pensive_home",
           "scene": null
         }
       ]

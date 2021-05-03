@@ -2,9 +2,9 @@
 	<view class="personalCenter">
 		<view class="personalCenter_info">
 			<view class="person_portrait">
-				<image src="../../static/images/imhg.jpeg" mode="aspectFill" />
+				<image :src="info.avatar" mode="aspectFill" />
 				<view class="person_name">
-					皇家御灵位
+					{{info.nickname}}
 				</view>
 			</view>
 
@@ -12,11 +12,11 @@
 				<view class="sign_in_btn">
 					<image src="../../static/images/imhg.jpeg" />
 					<view>
-						已签到
+						签到
 					</view>
 				</view>
 				<view class="sign_in_num">
-					签到{{sign_num}}天
+					签到{{info.sign_days}}天
 				</view>
 			</view>
 		</view>
@@ -28,7 +28,7 @@
 		<uni-list>
 			<uni-list-item ellipsis='1'
 				thumb='https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png'
-				:clickable='true' :title="'福星：'+lucky_star_num" to='../lucky_star/lucky_star'>
+				:clickable='true' :title="'福星：'+info.bless" to='../lucky_star/lucky_star'>
 				<view class="go_look" slot='footer'>
 					去看看
 				</view>
@@ -52,14 +52,14 @@
 				info: null
 			}
 		},
-		mounted(){
+		mounted() {
 			this.getUserInfo()
 		},
 		methods: {
 			// 获取个人信息
-			getUserInfo(){
-				userInfo({},(res)=>{
-					console.log(res)
+			getUserInfo() {
+				userInfo({}, (res) => {
+					this.info = res.data
 				})
 			}
 		}

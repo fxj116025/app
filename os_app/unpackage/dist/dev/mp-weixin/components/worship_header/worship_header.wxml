@@ -1,0 +1,1 @@
+<view class="worship_header" style="{{('background-image:url('+bgImg+')')}}"><image class="icon" src="../../static/images/header.png" mode="aspectFill"></image><view class="info"><view class="name">撒娇哈佛</view><view class="sex">男</view><view class="time">1990-1990</view></view></view>

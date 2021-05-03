@@ -49,6 +49,24 @@
 			}
 		
 		}
+        ,{
+            "path" : "pages/grief_home/grief_home",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "主页",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/pensive_home/pensive_home",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "寄哀思",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
