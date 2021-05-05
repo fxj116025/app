@@ -39,6 +39,13 @@
         {
           "name": "pages/pensive_home/pensive_home",
           "pathName": "pages/pensive_home/pensive_home",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/grief/grief",
+          "pathName": "pages/grief/grief",
+          "query": "",
           "scene": null
         }
       ]

@@ -7,7 +7,8 @@
     "pages/lucky_star/lucky_star",
     "pages/auth/auth",
     "pages/grief_home/grief_home",
-    "pages/pensive_home/pensive_home"
+    "pages/pensive_home/pensive_home",
+    "pages/grief/grief"
   ],
   "subPackages": [],
   "window": {

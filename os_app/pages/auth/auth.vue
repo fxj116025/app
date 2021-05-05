@@ -29,6 +29,17 @@
 		methods: {
 			bindGetUserInfo() {
 				let _this=this
+				
+				uni.getSetting({
+					success(res){
+						console.log(res)
+					},
+					fail(req){
+						console.log('失败')
+						console.log(req)
+					}
+				})
+				
 				uni.getUserProfile({
 					desc: '您的公开信息（昵称、头像等）',
 					success(res) {

@@ -2,6 +2,7 @@
   "navigationBarTitleText": "寄哀思",
   "enablePullDownRefresh": false,
   "usingComponents": {
+    "uni-load-more": "/uni_modules/uni-load-more/components/uni-load-more/uni-load-more",
     "worship": "/components/worship_header/worship_header"
   }
 }

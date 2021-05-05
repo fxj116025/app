@@ -67,6 +67,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/grief/grief",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "寄哀思",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
