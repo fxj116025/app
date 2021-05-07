@@ -89,8 +89,16 @@
   color: #333333;
   font-weight: bold;
 }
+.pensive_home .comment .worship_list .worship_item .item .item_top .item_top_right .item_right_bottom {
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  margin-top: 5rpx;
+}
 .pensive_home .comment .worship_list .worship_item .item .item_top .item_top_right .item_right_bottom .item_right_bottom_item {
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
   margin-right: 25rpx;
+  margin-bottom: 5rpx;
 }
 .pensive_home .comment .worship_list .worship_item .item .item_top .item_top_right .item_right_bottom .item_right_bottom_item .item_right_bottom_title {
   color: #333333;

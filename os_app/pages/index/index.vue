@@ -38,7 +38,7 @@
 		<!-- 列表 -->
 		<view class="list">
 			<view class="list_title">
-				<image src="../../static/images/new_iocn.png"/>
+				<image src="../../static/images/new_iocn.png" />
 				<view class="list_title_text">
 					最新发布
 				</view>
@@ -56,7 +56,8 @@
 	import {
 		home_swiper,
 		notice,
-		home_memorials
+		home_memorials,
+		execJobs
 	} from '../../common/http.js';
 	export default {
 		data() {
@@ -68,14 +69,16 @@
 				pageSize: 10,
 				total: 0,
 				list: [],
-				token:''
+				token: '',
+				is_all: false, //
+				toDay: ''
 			}
 		},
 		components: {
 			Item: item
 		},
 		mounted() {
-			this.token=uni.getStorageSync('token')
+			this.token = uni.getStorageSync('token')
 			if (!this.token) {
 				uni.reLaunch({
 					url: '../auth/auth',
@@ -87,20 +90,22 @@
 			}
 		},
 		methods: {
+			// // 登录任务
+			// login_task() {
+			// 	var day2 = new Date();
+			// 	day2.setTime(day2.getTime());
+			// 	var s2 = day2.getFullYear() + "-" + (day2.getMonth() + 1) + "-" + day2.getDate();
+			// 	this.toDay = new Date();
+			// 	console.log(s2)
+			// },
 			// 上拉加载更多
 			scrollBottom() {
-				// if(){
-
-				// }
-				if (this.list.length >= 10) {
-					this.more = 'noMore'
-				} else {
-					this.more = 'loading'
-					setTimeout(() => {
-						this.more = 'more';
-					}, 1000)
-
+				if (this.is_all) {
+					return
 				}
+				this.more = 'loading';
+				this.pageIndex += 1
+				this.get_memorials()
 			},
 			// 获取轮播
 			get_swiper() {
@@ -122,13 +127,20 @@
 					pagesize: this.pageSize
 				}
 				home_memorials(sendData, (res) => {
-					for (let v in res.data) {
-						this.list.push(res.data[v])
+					if (res.data.length === 0) {
+						this.is_all = true
+						this.more = 'noMore'
+					} else {
+						for (let v in res.data) {
+							this.list.push(res.data[v])
+							this.more = 'more'
+						}
 					}
+
 				})
 			},
 			// 去纪念馆
-			go_memorial() {
+			go_memorial(id) {
 				uni.navigateTo({
 					url: '../memorial_hall/memorial_hall'
 				})
@@ -147,14 +159,17 @@
 	.home_content {
 		height: 100vh;
 		background: #fff;
-		.left_icon{
+
+		.left_icon {
 			display: flex;
 			align-items: center;
-			image{
+
+			image {
 				width: 60rpx;
 				height: 60rpx;
 			}
 		}
+
 		.swiper_box {
 			width: 100%;
 			height: 340rpx;
@@ -174,13 +189,15 @@
 				padding: 0 30rpx;
 				height: 70rpx;
 				line-height: 70rpx;
+
 				.home_notice_item {
 					overflow: hidden;
 					text-overflow: ellipsis;
 					white-space: nowrap;
 					display: flex;
 					align-items: center;
-					image{
+
+					image {
 						width: 40rpx;
 						height: 40rpx;
 						margin-right: 20rpx;
@@ -198,10 +215,11 @@
 			justify-content: center;
 			font-size: 50rpx;
 			font-weight: bold;
-			image{
+
+			image {
 				width: 62rpx;
 				height: 62rpx;
-				margin-right:20rpx ;
+				margin-right: 20rpx;
 			}
 		}
 
@@ -214,10 +232,12 @@
 				border-bottom: 1px solid #F5F5F5;
 				box-sizing: border-box;
 				padding-left: 20rpx;
-				image{
+
+				image {
 					width: 55rpx;
 					height: 55rpx;
 				}
+
 				.list_title_text {
 					font-size: 35rpx;
 					font-weight: bold;

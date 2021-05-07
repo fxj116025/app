@@ -85,8 +85,8 @@
           align-items: center;
 }
 .lucky_star .row_icon image {
-  width: 80rpx;
-  height: 80rpx;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
 }
 .lucky_star .row_info {

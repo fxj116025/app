@@ -73,8 +73,9 @@
   width: 100%;
   height: 340rpx;
 }
-.memorial_hall_home .swiper_box .swiper_item {
-  background-color: #007AFF;
+.memorial_hall_home .swiper_box .swiper_item image {
+  width: 100%;
+  height: 100%;
 }
 .memorial_hall_home .list .list_title {
   color: #333333;

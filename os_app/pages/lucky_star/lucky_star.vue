@@ -25,178 +25,51 @@
 						今日已获得福星：
 					</view>
 					<view class="integral_num">
-						{{toDayGetIntegral}}
+						{{list.user_bless}}
 					</view>
 				</view>
 			</uni-list-item>
-			<uni-list-item>
+
+			<uni-list-item v-for="(v,i) of list.user_jobs" :key='i'>
 				<view class="row_icon" slot='header'>
-					<image src="../../static/images/imhg.jpeg" mode="aspectFill" />
+					<image :src="'../../static/images/'+i+'_icon.png'" mode="aspectFill" />
 				</view>
 				<view class="row_info" slot='body'>
 					<view class="row_info_top">
-						登录
+						{{v.job_name}}
 					</view>
 					<view class="row_info_center">
-						1福星/每日首次登录
+						{{v.everytime_job_bless}}福星/
+						<text v-if="i=='dl'">每日首次登录</text>
+						<text v-if="i=='jax'">每日寄一句哀思</text>
+						<text v-if="i=='gkjng'">每日有效观看一个纪念馆</text>
+						<text v-if="i=='fx'">每日分享一个纪念馆</text>
+						<text v-if="i=='gz'">每日关注一个纪念馆</text>
+						<text v-if="i=='jb'">每日祭拜一个纪念馆</text>
+						<text v-if="i=='yqhy'">每邀请一个好友</text>
+						<text v-if="i=='qd'">每签到一天</text>
 					</view>
 					<view class="row_info_bottom">
-						已获0福星/每日上限1福星
+						已获{{v.everyday_obtained_bless}}福星/每日上限{{v.everyday_bless_uplimit}}福星
 					</view>
 				</view>
 				<view class="row_btn_box" slot='footer'>
-					<view class="row_btn">
-						未完成
+					<view class="row_btn" v-if="v.everyday_obtained_bless==v.everyday_bless_uplimit">
+						已完成
+					</view>
+					<view class="row_btn" v-else @click="task(i)">
+						<text v-if="i=='dl'">未完成</text>
+						<text v-if="i=='jax'">去寄语</text>
+						<text v-if="i=='gkjng'">去观看</text>
+						<text v-if="i=='fx'">去分享</text>
+						<text v-if="i=='gz'">未完成</text>
+						<text v-if="i=='jb'">去寄语</text>
+						<text v-if="i=='yqhy'">去观看</text>
+						<text v-if="i=='qd'">去签到</text>
 					</view>
 				</view>
 			</uni-list-item>
-			<uni-list-item>
-				<view class="row_icon" slot='header'>
-					<image src="../../static/images/imhg.jpeg" mode="aspectFill" />
-				</view>
-				<view class="row_info" slot='body'>
-					<view class="row_info_top">
-						寄哀思
-					</view>
-					<view class="row_info_center">
-						1福星/每日寄一句哀思
-					</view>
-					<view class="row_info_bottom">
-						已获0福星/每日上限1福星
-					</view>
-				</view>
-				<view class="row_btn_box" slot='footer'>
-					<view class="row_btn">
-						去寄语
-					</view>
-				</view>
-			</uni-list-item>
-			<uni-list-item>
-				<view class="row_icon" slot='header'>
-					<image src="../../static/images/imhg.jpeg" mode="aspectFill" />
-				</view>
-				<view class="row_info" slot='body'>
-					<view class="row_info_top">
-						观看纪念馆
-					</view>
-					<view class="row_info_center">
-						1福星/每日有效观看一个纪念馆
-					</view>
-					<view class="row_info_bottom">
-						已获0福星/每日上限6福星
-					</view>
-				</view>
-				<view class="row_btn_box" slot='footer'>
-					<view class="row_btn">
-						去观看
-					</view>
-				</view>
-			</uni-list-item>
-			<uni-list-item>
-				<view class="row_icon" slot='header'>
-					<image src="../../static/images/imhg.jpeg" mode="aspectFill" />
-				</view>
-				<view class="row_info" slot='body'>
-					<view class="row_info_top">
-						分享
-					</view>
-					<view class="row_info_center">
-						1福星/每日分享一个纪念馆
-					</view>
-					<view class="row_info_bottom">
-						已获0福星/每日上限2福星
-					</view>
-				</view>
-				<view class="row_btn_box" slot='footer'>
-					<view class="row_btn">
-						去分享
-					</view>
-				</view>
-			</uni-list-item>
-			<uni-list-item>
-				<view class="row_icon" slot='header'>
-					<image src="../../static/images/imhg.jpeg" mode="aspectFill" />
-				</view>
-				<view class="row_info" slot='body'>
-					<view class="row_info_top">
-						关注
-					</view>
-					<view class="row_info_center">
-						1福星/每日关注一个纪念馆
-					</view>
-					<view class="row_info_bottom">
-						已获0福星/每日上限2福星
-					</view>
-				</view>
-				<view class="row_btn_box" slot='footer'>
-					<view class="row_btn">
-						未完成
-					</view>
-				</view>
-			</uni-list-item>
-			<uni-list-item>
-				<view class="row_icon" slot='header'>
-					<image src="../../static/images/imhg.jpeg" mode="aspectFill" />
-				</view>
-				<view class="row_info" slot='body'>
-					<view class="row_info_top">
-						祭拜
-					</view>
-					<view class="row_info_center">
-						1福星/每日祭拜一个纪念馆
-					</view>
-					<view class="row_info_bottom">
-						已获0福星/每日上限1福星
-					</view>
-				</view>
-				<view class="row_btn_box" slot='footer'>
-					<view class="row_btn">
-						去寄语
-					</view>
-				</view>
-			</uni-list-item>
-			<uni-list-item>
-				<view class="row_icon" slot='header'>
-					<image src="../../static/images/imhg.jpeg" mode="aspectFill" />
-				</view>
-				<view class="row_info" slot='body'>
-					<view class="row_info_top">
-						邀请好友
-					</view>
-					<view class="row_info_center">
-						20福星/每邀请一个好友
-					</view>
-					<view class="row_info_bottom">
-						已获0福星/每日上限60福星
-					</view>
-				</view>
-				<view class="row_btn_box" slot='footer'>
-					<view class="row_btn">
-						去观看
-					</view>
-				</view>
-			</uni-list-item>
-			<uni-list-item>
-				<view class="row_icon" slot='header'>
-					<image src="../../static/images/imhg.jpeg" mode="aspectFill" />
-				</view>
-				<view class="row_info" slot='body'>
-					<view class="row_info_top">
-						签到
-					</view>
-					<view class="row_info_center">
-						2福星/每签到一天
-					</view>
-					<view class="row_info_bottom">
-						已获0福星/每日上限2福星
-					</view>
-				</view>
-				<view class="row_btn_box" slot='footer'>
-					<view class="row_btn">
-						去签到
-					</view>
-				</view>
-			</uni-list-item>
+
 		</uni-list>
 		<!-- 弹出层 -->
 		<uni-popup ref="popup" type="bottom">
@@ -222,10 +95,10 @@
 						<view class="commodity_item" :class="selectRecharge==i?'commodity_item_active':''"
 							v-for="(v,i) of rechargeList" :key='i' @click="selectPrice(i)">
 							<view class="commodity_num">
-								{{v.num}}福星
+								{{v.bless_num}}福星
 							</view>
 							<view class="commodity_price">
-								售价￥{{v.price}}
+								售价￥{{v.amount}}
 							</view>
 						</view>
 					</view>
@@ -263,6 +136,13 @@
 </template>
 
 <script>
+	import {
+		blessJobs,
+		userInfo,
+		recharge,
+		getPayConf,
+		execJobs
+	} from '../../common/http.js'
 	export default {
 		data() {
 			return {
@@ -271,40 +151,23 @@
 				selectRecharge: 0,
 				select_num: 0,
 				recharge_num: '',
-				rechargeList: [{
-						num: 1000,
-						price: '10.00'
-					},
-					{
-						num: 2000,
-						price: '20.00'
-					},
-					{
-						num: 3000,
-						price: '30.00'
-					},
-					{
-						num: 4000,
-						price: '39.00'
-					},
-					{
-						num: 5000,
-						price: '49.00'
-					},
-					{
-						num: 6000,
-						price: '59.00'
-					},
-				],
+				list: {},
+				rechargeList: [],
 
 			};
 		},
 		methods: {
+			// 获取个人信息
+			getUserInfo() {
+				userInfo({}, (res) => {
+					this.luckyStarNum = res.data.bless
+				})
+			},
 			// 打开充值弹出
 			open_pay() {
 				this.selectRecharge = 0;
 				this.recharge_num = '';
-				this.select_num = this.rechargeList[0].price
+				this.select_num = this.rechargeList[0].amount
 				this.$refs.popup.open()
 			},
 			// 关闭弹窗
@@ -314,28 +177,94 @@
 			//选择金额
 			selectPrice(i) {
 				this.selectRecharge = i
-				this.select_num = this.rechargeList[i].price
+				this.select_num = this.rechargeList[i].amount
 			},
 			// 输入金额
 			input_price() {
 				this.selectRecharge = -1
 			},
+			// 获取支付配置
+			getPay() {
+				getPayConf({}, (res) => {
+					console.log(res)
+					this.rechargeList = res.data
+				})
+			},
 			// 支付
 			atOnce_pay() {
-				let num = 0
+				let num = '',
+					id = '',
+					_this=this
 				if (this.selectRecharge != -1) {
-					num = this.rechargeList[this.selectRecharge].num
+					// num = this.rechargeList[this.selectRecharge].bless_num
+					id = this.rechargeList[this.selectRecharge].id
 				} else {
 					num = this.recharge_num
 				}
-				uni.showToast({
-					title: '本次购买' + num + '个,需要支付' + this.returnFloat + '元',
-					icon: 'none',
-					duration: 5000
+				let sendData = {
+					amount: num,
+					pay_conf_id: id,
+					remark: ''
+				}
+				recharge(sendData, (res) => {
+					uni.showLoading({
+						title: '支付中',
+						mask: true
+					});
+					uni.requestPayment({
+						provider: 'wxpay',
+						timeStamp: String(res.data.timeStamp),
+						nonceStr: res.data.nonceStr,
+						package: res.data.package,
+						signType: res.data.signType,
+						paySign: res.data.paySign,
+						success(res) {
+							uni.showModal({
+								content: '充值成功',
+								showCancel: false
+							})
+							_this.getUserInfo()
+							_this.closePop()
+						},
+						fail(req) {
+							uni.showToast({
+								title: '支付失败',
+								icon: 'none',
+								duration: 2000
+							})
+						},
+						complete() {
+							uni.hideLoading()
+						}
+					})
+
 				})
+
+				// uni.showToast({
+				// 	title: '本次购买' + num + '个,需要支付' + this.returnFloat + '元,id为' + id,
+				// 	icon: 'none',
+				// 	duration: 5000
+				// })
+			},
+			init() {
+				blessJobs({}, (res) => {
+					// console.log(res)
+					this.list = res.data
+					// for (let v in res.data.user_jobs) {
+					// 	this.list.push(res.data.user_jobs[v])
+					// }
+				})
+			},
+			// 做任务
+			task(type){
+				// execJobs()
+				console.log(type)
 			}
 		},
 		mounted() {
+			this.getUserInfo()
+			this.init()
+			this.getPay()
 			// this.$refs.popup.open()
 		},
 		computed: {
@@ -425,8 +354,8 @@
 			align-items: center;
 
 			image {
-				width: 80rpx;
-				height: 80rpx;
+				width: 100rpx;
+				height: 100rpx;
 				border-radius: 50%;
 			}
 		}

@@ -33,19 +33,25 @@
         {
           "name": "pages/grief_home/grief_home",
           "pathName": "pages/grief_home/grief_home",
-          "query": "",
+          "query": "id=1",
           "scene": null
         },
         {
           "name": "pages/pensive_home/pensive_home",
           "pathName": "pages/pensive_home/pensive_home",
-          "query": "",
+          "query": "id=1",
           "scene": null
         },
         {
           "name": "pages/grief/grief",
           "pathName": "pages/grief/grief",
-          "query": "",
+          "query": "id=1",
+          "scene": null
+        },
+        {
+          "name": "pages/attention/attention",
+          "pathName": "pages/attention/attention",
+          "query": "id=1",
           "scene": null
         }
       ]

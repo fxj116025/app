@@ -22,11 +22,11 @@ function getRequest(url, data) {
 				'content-type': 'application/json'
 			},
 			success: function(res) {
-				if (res.statusCode === 200&&res.data.code === 1) {
+				if (res.statusCode === 200 && res.data.code === 1) {
 					resolve(res.data);
 				} else {
 					uni.showToast({
-						title: res.data.msg||'请求失败',
+						title: res.data.msg || '请求失败',
 						icon: 'none',
 						duration: 2000
 					})
@@ -46,6 +46,10 @@ function getRequest(url, data) {
 
 //post请求封装
 function postRequest(url, data) {
+	uni.showLoading({
+		title: '加载中',
+		mask: true
+	});
 	return new Promise((resolve, reject) => {
 		var postData = data;
 		if (uni.getStorageSync('token')) {
@@ -59,11 +63,12 @@ function postRequest(url, data) {
 				'content-type': 'application/x-www-form-urlencoded',
 			},
 			success: function(res) {
+				uni.hideLoading()
 				if (res.statusCode === 200 && res.data.code === 1) {
 					resolve(res.data);
-				}else{
+				} else {
 					uni.showToast({
-						title: res.data.msg||'请求失败',
+						title: res.data.msg || '请求失败',
 						icon: 'none',
 						duration: 2000
 					})

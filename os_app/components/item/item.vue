@@ -1,5 +1,5 @@
 <template>
-	<view class="item" @click="grief_home">
+	<view class="item" @click="grief_home(obj.id)">
 		<view class="item_left">
 			<image :src="obj.gone_user_avatar" mode="aspectFill" lazy-load='true' />
 		</view>
@@ -52,24 +52,13 @@
 		props:{
 			'obj':{
 				type:Object,
-				// required:true
-				default(){
-					return {
-						gone_user_avatar:'../../static/images/imhg.jpeg',
-						gone_user_name:'二u去哦i去',
-						gone_user_years:'1837.99.63~4749.66.66',
-						action:{
-							jx:1231,
-							gz:235423
-						}
-					}
-				}
+				required:true
 			}
 		},
 		methods:{
-			grief_home(){
+			grief_home(id){
 				uni.navigateTo({
-					url:'../../pages/grief_home/grief_home'
+					url:'../../pages/grief_home/grief_home?id='+id
 				})
 			}
 		}

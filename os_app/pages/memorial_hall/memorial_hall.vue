@@ -8,25 +8,22 @@
 						<uni-icons type="search" size="20"></uni-icons>
 					</view>
 					<input type="text" v-model="searchText" placeholder="查找纪念馆" />
-					<view class="input_btn">
+					<view class="input_btn" @click="search_memorial">
 						搜索
 					</view>
 				</view>
 			</view>
-			
-			
-			
+
+
+
 			<!-- 轮播 -->
 			<swiper circular='true' class="swiper_box">
-				<swiper-item class="swiper_item">
-					图片1
-				</swiper-item>
-				<swiper-item class="swiper_item">
-					图片2
+				<swiper-item class="swiper_item" v-for="(v,i) of swiperList" :key='v.id'>
+					<image :src="v.lunbo_image" mode="aspectFill" />
 				</swiper-item>
 			</swiper>
-			
-			
+
+
 			<!-- 列表 -->
 			<view class="list">
 				<view class="list_title">
@@ -35,71 +32,82 @@
 						推荐
 					</view>
 				</view>
-				<Item v-for="(v,i) of list" :key='i' />
+				<Item v-for="(v,i) of list" :key='i' :obj="v" />
 			</view>
 			<uni-load-more :status="more"></uni-load-more>
 		</view>
-		
+
 	</scroll-view>
 </template>
 
 <script>
 	import item from '../../components/item/item.vue';
+	import {
+		home_memorials,
+		home_swiper
+	} from '../../common/http.js'
 	export default {
 		data() {
 			return {
 				searchText: '',
 				more: 'more', //more/loading/noMore
-				list: [{
-						name: '名字',
-						time: '2000.20.20~2100.90.90',
-						joss: 10000,
-						attention: 10000000,
-						utterer: '五月阿松大'
-					},
-					{
-						name: '名字',
-						time: '2000.20.20~2100.90.90',
-						joss: 10000,
-						attention: 10000000,
-						utterer: '五月阿松大'
-					},
-					{
-						name: '名字',
-						time: '2000.20.20~2100.90.90',
-						joss: 10000,
-						attention: 10000000,
-						utterer: '五月阿松大'
-					},
-					{
-						name: '名字',
-						time: '2000.20.20~2100.90.90',
-						joss: 10000,
-						attention: 10000000,
-						utterer: '五月阿松大'
-					},
-				]
+				list: [],
+				pageIndex: 1,
+				pageSize: 10,
+				is_all: false,
+				swiperList:[]
 			}
 		},
 		components: {
 			Item: item
 		},
+		mounted(){
+			this.init()
+			this.get_swiper()
+		},
 		methods: {
+			init() {
+				let sendData = {
+					page: this.pageIndex,
+					pagesize: this.pageSize,
+					keywords: this.searchText,
+					recommend: 1
+				}
+				home_memorials(sendData, (res) => {
+					if (res.data.length === 0) {
+						this.is_all = true
+						this.more = 'noMore'
+					} else {
+						for (let v in res.data) {
+							this.list.push(res.data[v])
+							this.more = 'more'
+						}
+					}
+				})
+			},
 			// 上拉加载更多
 			scrollBottom() {
-				console.log(0)
-				if (this.list.length >= 10) {
-					this.more = 'noMore'
-				} else {
-					this.more = 'loading'
-					setTimeout(() => {
-						this.more = 'more';
-						let L = JSON.parse(JSON.stringify(this.list))
-						this.list = this.list.concat(L);
-					}, 1000)
-
+				if (this.is_all) {
+					return
 				}
+				this.more = 'loading';
+				this.pageIndex += 1
+				this.init()
 			},
+			// 获取轮播
+			get_swiper() {
+				home_swiper({}, (res) => {
+					this.swiperList = res.data
+				})
+			},
+			//搜索
+			search_memorial() {
+				this.is_all = false
+				this.pageIndex = 1
+				this.list = []
+				this.more = 'more'
+				this.init()
+			}
 		}
 	}
 </script>
@@ -109,10 +117,12 @@
 		height: 100vh;
 		width: 100%;
 		background-color: #fff;
+
 		.memorial_header_input {
 			width: 90%;
 			padding: 20rpx 0 10rpx 0;
 			position: relative;
+
 			input {
 				width: 100%;
 				height: 70rpx;
@@ -153,7 +163,11 @@
 			height: 340rpx;
 
 			.swiper_item {
-				background-color: #007AFF;
+				// background-color: #007AFF;
+				image {
+					width: 100%;
+					height: 100%;
+				}
 			}
 		}
 

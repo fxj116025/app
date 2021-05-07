@@ -16,7 +16,7 @@
 
 <script>
 	import {
-		login
+		login,
 	} from '../../common/http.js';
 
 	export default {
