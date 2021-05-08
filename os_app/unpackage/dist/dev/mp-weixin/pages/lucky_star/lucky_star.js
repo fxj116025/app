@@ -456,8 +456,14 @@ var _default = { data: function data() {return { luckyStarNum: 0, toDayGetIntegr
         // }
       });}, // 做任务
     task: function task(type) {// execJobs()
-      console.log(type);} }, mounted: function mounted() {this.getUserInfo();this.init();this.getPay(); // this.$refs.popup.open()
-  }, computed: { returnFloat: function returnFloat() {var f;if (this.selectRecharge != -1) {f = Number(this.select_num);} else {f = Number(this.recharge_num / 100);}f = Math.floor(f * 100) / 100;var s = f.toString();var rs = s.indexOf('.');if (rs < 0) {rs = s.length;s += '.';}while (s.length <= rs + 2) {s += '0';}return s;} } };exports.default = _default;
+      console.log(type);switch (type) {case 'gkjng':case 'jax':case 'fx':case 'gz':case 'jb':uni.navigateTo({ url: '../memorial_hall/memorial_hall' });break;default:break;}} }, mounted: function mounted() {this.getUserInfo();this.init();this.getPay(); // this.$refs.popup.open()
+  }, computed: { returnFloat: function returnFloat() {var f;if (this.selectRecharge != -1) {f = Number(this.select_num);} else {f = Number(this.recharge_num / 100);}f = Math.floor(f * 100) / 100;var s = f.toString();var rs = s.indexOf('.');if (rs < 0) {rs = s.length;s += '.';
+      }
+      while (s.length <= rs + 2) {
+        s += '0';
+      }
+      return s;
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

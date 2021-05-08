@@ -407,7 +407,7 @@ var _default = { data: function data() {return { id: '', info: {}, ifplay: true,
     cancelShare: function cancelShare() {this.$refs.popup.close();}, // 链接
     share_link: function share_link() {// uni.share({
       // })
-    } }, onLoad: function onLoad(option) {var _this = this;this.id = option.id;var sendData = { memorial_id: option.id };(0, _http.memorial_detail)(sendData, function (res) {_this.info = res.data;});}, onShareAppMessage: function onShareAppMessage(res) {(0, _http.execJobs)({ job_name: 'fx' }, function (res) {console.log(res);});}, mounted: function mounted() {this.$nextTick(function () {this.innerAudioContext = uni.createInnerAudioContext();this.innerAudioContext.autoplay = true;this.innerAudioContext.loop = true;this.innerAudioContext.src = this.info.background_music;});} };exports.default = _default;
+    } }, onLoad: function onLoad(option) {var _this = this;this.id = option.id;var sendData = { memorial_id: option.id };(0, _http.memorial_detail)(sendData, function (res) {_this.info = res.data;(0, _http.execJobs)({ job_name: 'gkjng' }, function (res) {console.log(res);});});}, onShareAppMessage: function onShareAppMessage(res) {(0, _http.execJobs)({ job_name: 'fx' }, function (res) {console.log(res);});}, mounted: function mounted() {this.$nextTick(function () {this.innerAudioContext = uni.createInnerAudioContext();this.innerAudioContext.autoplay = true;this.innerAudioContext.loop = true;this.innerAudioContext.src = this.info.background_music;});} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

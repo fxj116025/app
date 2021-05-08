@@ -243,7 +243,7 @@ var _http = __webpack_require__(/*! ../../common/http.js */ 17); //
 //
 var _default = { data: function data() {return { sign_num: 0, lucky_star_num: 0, info: null, is_look: false };}, mounted: function mounted() {this.getUserInfo();}, methods: { // 获取个人信息
     getUserInfo: function getUserInfo() {var _this = this;(0, _http.userInfo)({}, function (res) {_this.info = res.data;_this.is_look = true;});}, //签到
-    sign: function sign() {var sendData = { job_name: 'qd' };(0, _http.execJobs)(sendData, function (res) {console.log(res);});} } };exports.default = _default;
+    sign: function sign() {var _this2 = this;var sendData = { job_name: 'qd' };(0, _http.execJobs)(sendData, function (res) {console.log(res);_this2.getUserInfo();});} } };exports.default = _default;
 
 /***/ }),
 

@@ -2611,11 +2611,13 @@ function postRequest(url, data) {
         if (res.statusCode === 200 && res.data.code === 1) {
           resolve(res.data);
         } else {
-          uni.showToast({
-            title: res.data.msg || '请求失败',
-            icon: 'none',
-            duration: 2000 });
+          if (url != '/user/execJobs') {
+            uni.showToast({
+              title: res.data.msg || '请求失败',
+              icon: 'none',
+              duration: 2000 });
 
+          }
         }
       },
       error: function error(e) {

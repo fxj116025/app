@@ -275,6 +275,7 @@ var _http = __webpack_require__(/*! ../../common/http.js */ 17);var oblation = f
 
 
 
+
 {
   data: function data() {
     return {
@@ -360,6 +361,11 @@ var _http = __webpack_require__(/*! ../../common/http.js */ 17);var oblation = f
           icon: 'none',
           duration: 2000 });
 
+        (0, _http.execJobs)({
+          job_name: 'jax' },
+        function (res) {
+          console.log(res);
+        });
         setTimeout(function () {
           uni.navigateBack({
             delta: 1 });

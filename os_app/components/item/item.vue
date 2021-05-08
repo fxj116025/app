@@ -28,7 +28,7 @@
 					{{obj.action.gz}}
 				</view>
 			</view>
-			<view class="item_right_num">
+		<!-- 	<view class="item_right_num">
 				<image src="../../static/images/fb_iocn.png" mode="scaleToFill"/>
 				<view>
 					发表人：
@@ -36,7 +36,7 @@
 				<view>
 					诸葛孔明
 				</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>

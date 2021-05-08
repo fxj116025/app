@@ -72,6 +72,7 @@
 				}
 				execJobs(sendData,(res)=>{
 					console.log(res)
+					this.getUserInfo()
 				})
 			}
 		}

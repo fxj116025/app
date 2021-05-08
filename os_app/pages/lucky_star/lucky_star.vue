@@ -194,7 +194,7 @@
 			atOnce_pay() {
 				let num = '',
 					id = '',
-					_this=this
+					_this = this
 				if (this.selectRecharge != -1) {
 					// num = this.rechargeList[this.selectRecharge].bless_num
 					id = this.rechargeList[this.selectRecharge].id
@@ -256,9 +256,22 @@
 				})
 			},
 			// 做任务
-			task(type){
+			task(type) {
 				// execJobs()
 				console.log(type)
+				switch (type) {
+					case 'gkjng':
+					case 'jax':
+					case 'fx':
+					case 'gz':
+					case 'jb':
+						uni.navigateTo({
+							url: '../memorial_hall/memorial_hall'
+						})
+						break;
+					default:
+						break;
+				}
 			}
 		},
 		mounted() {

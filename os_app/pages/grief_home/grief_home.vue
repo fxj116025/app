@@ -175,6 +175,7 @@
 
 				// })
 			},
+			
 		},
 		onLoad(option) {
 			this.id = option.id
@@ -183,7 +184,11 @@
 			}
 			memorial_detail(sendData, (res) => {
 				this.info = res.data
-
+				execJobs({
+					job_name: 'gkjng'
+				}, (res) => {
+					console.log(res)
+				})
 			})
 		},
 		onShareAppMessage(res) {

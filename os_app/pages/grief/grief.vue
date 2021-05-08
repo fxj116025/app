@@ -82,7 +82,8 @@
 	import oblation from '../../components/oblation/oblation.vue'
 	import {
 		sacrifice,
-		memorialSorrow
+		memorialSorrow,
+		execJobs
 	} from '../../common/http.js'
 	export default {
 		data() {
@@ -168,6 +169,11 @@
 						title: '留言成功',
 						icon: 'none',
 						duration: 2000
+					})
+					execJobs({
+						job_name: 'jax'
+					}, (res) => {
+						console.log(res)
 					})
 					setTimeout(() => {
 						uni.navigateBack({

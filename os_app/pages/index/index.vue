@@ -87,17 +87,18 @@
 				this.get_swiper()
 				this.get_notice()
 				this.get_memorials()
+				this.login_task()
 			}
 		},
 		methods: {
 			// // 登录任务
-			// login_task() {
-			// 	var day2 = new Date();
-			// 	day2.setTime(day2.getTime());
-			// 	var s2 = day2.getFullYear() + "-" + (day2.getMonth() + 1) + "-" + day2.getDate();
-			// 	this.toDay = new Date();
-			// 	console.log(s2)
-			// },
+			login_task() {
+				execJobs({
+					job_name: 'dl'
+				}, (res) => {
+					console.log(res)
+				})
+			},
 			// 上拉加载更多
 			scrollBottom() {
 				if (this.is_all) {
