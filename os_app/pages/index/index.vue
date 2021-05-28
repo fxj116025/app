@@ -8,7 +8,7 @@
 		</uni-nav-bar>
 
 		<!-- 轮播 -->
-		<swiper circular='true' class="swiper_box">
+		<swiper circular='true' class="swiper_box" autoplay='true'>
 			<swiper-item class="swiper_item" v-for="(v,i) of swiperList" :key='v.id'>
 				<image :src="v.lunbo_image" mode="aspectFill" />
 			</swiper-item>
@@ -77,18 +77,34 @@
 		components: {
 			Item: item
 		},
-		mounted() {
+		onLoad(ops){
 			this.token = uni.getStorageSync('token')
 			if (!this.token) {
 				uni.reLaunch({
-					url: '../auth/auth',
+					url: ops.uid?'../auth/auth?uid='+ops.uid+'&gid='+ops.gid:'../auth/auth',
 				})
 			} else {
+				if(ops.gid){
+					uni.showModal({
+						content:'是否进入个人纪念馆？',
+						success(res){
+							if(res.confirm){
+								uni.navigateTo({
+									url:'../../pages/grief_home/grief_home?id='+ops.gid
+								})
+							}
+						}
+					})
+				}
+				
 				this.get_swiper()
 				this.get_notice()
 				this.get_memorials()
 				this.login_task()
 			}
+		},
+		mounted() {
+			
 		},
 		methods: {
 			// // 登录任务

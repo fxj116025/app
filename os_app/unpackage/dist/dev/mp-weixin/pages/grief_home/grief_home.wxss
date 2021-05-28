@@ -145,6 +145,53 @@
   margin-top: 5rpx;
   font-size: 26rpx;
 }
+.grief_home .img_mask {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.grief_home .img_mask .img_mask_num {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  z-index: 100;
+  color: #fff;
+  font-size: 40rpx;
+  text-align: center;
+  width: 100%;
+}
+.grief_home .img_mask .home_notice_box {
+  width: 100%;
+  height: 100%;
+}
+.grief_home .img_mask .home_notice_box .home_notice_item {
+  width: 100%;
+  height: 100%;
+}
+.grief_home .img_mask .home_notice_box .home_notice_item .scroll_img {
+  width: 100%;
+  height: 100vh;
+}
+.grief_home .img_mask .home_notice_box .home_notice_item .scroll_img .scroll_img_box {
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.grief_home .img_mask .home_notice_box .home_notice_item .scroll_img .scroll_img_box image {
+  width: 100%;
+}
 .grief_home .grief_home_footer {
   position: fixed;
   left: 0;
@@ -186,6 +233,52 @@
   width: 40rpx;
   height: 40rpx;
   margin-right: 20rpx;
+}
+.grief_home .popup_qrcode_mask {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding-top: 150rpx;
+}
+.grief_home .popup_qrcode_mask .popup_qrcode {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 85%;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 50rpx 0;
+}
+.grief_home .popup_qrcode_mask .popup_qrcode .popup_qrcode_image {
+  width: 100%;
+}
+.grief_home .popup_qrcode_mask .popup_qrcode .popup_qrcode_text {
+  margin-top: 40rpx;
+  text-align: center;
+}
+.grief_home .popup_qrcode_mask .xianX {
+  margin: 0 auto;
+  width: 2px;
+  height: 70rpx;
+  background-color: #999999;
+}
+.grief_home .popup_qrcode_mask .close_btn {
+  display: block;
+  margin: 0 auto;
+  width: 80rpx;
+  height: 80rpx;
+}
+.grief_home .grief_home_swiper_box {
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  height: calc(100vh - 140rpx);
+}
+.grief_home .grief_home_swiper_box .grief_home_swiper_item {
+  overflow-y: auto;
 }
 .grief_home .share_box {
   width: 100%;

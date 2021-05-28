@@ -1,13 +1,20 @@
 <template>
-	<scroll-view class="attention" scroll-y='true' @scrolltolower='scrollBottom'>
+	<scroll-view class="attention" scroll-y='true' @scrolltolower='scrollBottom' v-if="is_show">
 		<view class="segmentation">
 
 		</view>
 		<!-- 列表 -->
-		<view class="list">
+		<view class="list" v-if="list.length>0">
+		<!-- <view class="list" v-if="false"> -->
 			<Item v-for="(v,i) of list" :key='i' :obj="v" />
+			<uni-load-more :status="more"></uni-load-more>
 		</view>
-		<uni-load-more :status="more"></uni-load-more>
+		<view class="nodata" v-else>
+			<image src="../../static/images/nomsg.png" />
+			<view class="noText">
+				暂无数据
+			</view>
+		</view>
 	</scroll-view>
 </template>
 
@@ -26,7 +33,8 @@
 				pageIndex: 1,
 				pageSize: 10,
 				list: [],
-				is_all:false
+				is_all: false,
+				is_show: false
 			};
 		},
 		mounted() {
@@ -48,6 +56,7 @@
 							this.more = 'more'
 						}
 					}
+					this.is_show = true
 				})
 			},
 			// 上拉加载更多
@@ -66,5 +75,20 @@
 <style lang="scss">
 	.attention {
 		height: 100vh;
+		.nodata{
+			width: 200rpx;
+			box-sizing: border-box;
+			margin: 0 auto;
+			margin-top: 200rpx;
+			text-align: center;
+			color: #333;
+			image{
+				margin: 0 auto;
+				display: block;
+				width: 100rpx;
+				height: 100rpx;
+				margin-bottom: 50rpx;
+			}
+		}
 	}
 </style>

@@ -33,7 +33,7 @@
         {
           "name": "pages/grief_home/grief_home",
           "pathName": "pages/grief_home/grief_home",
-          "query": "id=1",
+          "query": "id=12",
           "scene": null
         },
         {
@@ -52,6 +52,30 @@
           "name": "pages/attention/attention",
           "pathName": "pages/attention/attention",
           "query": "id=1",
+          "scene": null
+        },
+        {
+          "name": "pages/pages/turn/turn",
+          "pathName": "pages/pages/turn/turn",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/turn/turn",
+          "pathName": "pages/turn/turn",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/grief_home/grief_home",
+          "pathName": "pages/grief_home/grief_home",
+          "query": "id=11",
           "scene": null
         }
       ]

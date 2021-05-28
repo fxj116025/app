@@ -17,7 +17,7 @@
 
 
 			<!-- 轮播 -->
-			<swiper circular='true' class="swiper_box">
+			<swiper circular='true' class="swiper_box" autoplay='true'>
 				<swiper-item class="swiper_item" v-for="(v,i) of swiperList" :key='v.id'>
 					<image :src="v.lunbo_image" mode="aspectFill" />
 				</swiper-item>

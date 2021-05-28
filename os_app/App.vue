@@ -16,9 +16,11 @@
 			console.log('App Hide')
 		}
 	}
+	
 </script>
 
 <style lang="scss">
+	@import url("@/components/u-parse/u-parse.css");
 	/*每个页面公共css */
 	.segmentation {
 		width: 100%;

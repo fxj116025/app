@@ -1,1 +1,1 @@
-.attention{height:100vh}
+.attention{height:100vh}.attention .nodata{width:200rpx;box-sizing:border-box;margin:0 auto;margin-top:200rpx;text-align:center;color:#333}.attention .nodata image{margin:0 auto;display:block;width:100rpx;height:100rpx;margin-bottom:50rpx}

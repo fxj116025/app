@@ -1,6 +1,36 @@
 <template>
-	<scroll-view class="pensive_home" scroll-y='true' @scrolltolower='scrollBottom'>
-		<worship :info='info' />
+	<!-- <scroll-view class="pensive_home" scroll-y='true' @scrolltolower='scrollBottom'> -->
+	<view class="pensive_home">
+		<!-- 头部 -->
+		<view class="worship_header" :style="'background-image:url(' + bgImg + ')'">
+			<!-- 顶上按钮 -->
+			<view class="top_btn">
+				<view class="top_btn_yy">
+					<image :src="YY" :class="is_play ? 'active_yy' : ''" @click="is_music" />
+				</view>
+				<view class="top_btn_num">
+					<image src="../../static/images/fx2.png"/>
+					<view class="fx_num">{{info.user_bless}}</view>
+				</view>
+			</view>
+
+			<!-- 左边 -->
+			<view class="left_col">
+				<view class="left_col_row" v-for="(v, i) of left" :key="i" :style="{backgroundColor:leftBtn}">
+					<image :src="v.icon" />
+					<view class="text">{{ v.title }}</view>
+				</view>
+			</view>
+			<!-- 头像 -->
+			<image :src="info.gone_user_avatar" mode="aspectFill" class="icon" :style="{top:imgTop+'rpx'}" />
+
+			<!-- 信息 -->
+			<view class="info" :style="{top:infotop+'rpx'}">
+				<view class="name">{{info.gone_user_name}}</view>
+				<view class="sex">{{info.gender===0?'女':'男'}}</view>
+				<view class="time">{{info.gone_user_years}}</view>
+			</view>
+		</view>
 
 		<view class="comment">
 			<!-- 数量 -->
@@ -43,20 +73,26 @@
 
 		</view>
 
-		<!-- 顶部 -->
+		<!-- 底部 -->
 		<view class="send_grief flex_box">
-			<view class="btn" @click="go_grief">
+			<view class="send_grief_btn" @click="go_grief">
 				寄哀思
 			</view>
 		</view>
-	</scroll-view>
+	<!-- </scroll-view> -->
+	</view>
 </template>
 
 <script>
-	import worship from '../../components/worship_header/worship_header.vue';
 	import {
 		staticDetail
 	} from '../../common/http.js'
+	import {
+		imaga64
+	} from '../../common/base64.js';
+
+	import yy from '../../static/images/yy2.png';
+	import jyy from '../../static/images/jyy2.png';
 	export default {
 		data() {
 			return {
@@ -80,26 +116,45 @@
 					}
 				],
 				more: 'more', //more/loading/noMore
-				// worshipList: [{
-				// 	name: '大哥',
-				// 	tetx: '大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥大哥',
-				// 	time: '2021年04月03日 11:04:25'
-				// }]
+				type: -1,
+				bgImg: '',
+				imgTop: 225,
+				infotop: 500,
+				leftBtn: '#3D3E4E',
+				YY: yy,
+				is_play: true,
+				innerAudioContext: null,
+				// left: [{
+				// 		title: '敬香',
+				// 		icon: '../../static/images/jx2.png'
+				// 	},
+				// 	{
+				// 		title: '蜡烛',
+				// 		icon: '../../static/images/lz.png'
+				// 	},
+				// 	{
+				// 		title: '花圈',
+				// 		icon: '../../static/images/hq.png'
+				// 	},
+				// 	{
+				// 		title: '扫墓',
+				// 		icon: '../../static/images/sm.png'
+				// 	},
+				// ]
 			};
 		},
 		methods: {
-			// 上拉加载更多
-			scrollBottom() {
-				// if (this.worshipList.length >= 10) {
-				// 	this.more = 'noMore'
-				// } else {
-				// 	this.more = 'loading'
-				// 	setTimeout(() => {
-				// 		this.more = 'more';
-				// 	}, 1000)
-
-				// }
+			is_music() {
+				this.is_play = !this.is_play;
+				this.is_play ? this.YY = yy : this.YY = jyy
+				if (this.is_play) {
+					this.innerAudioContext.play();
+				} else {
+					this.innerAudioContext.pause();
+				}
 			},
+			// 上拉加载更多
+			scrollBottom() {},
 			// 去寄哀思、
 			go_grief() {
 				uni.navigateTo({
@@ -117,31 +172,193 @@
 				let s = (date.getSeconds() < 10 ? '0' + (date.getSeconds()) : date.getSeconds());
 				return (Y + M + D + h + m + s);
 			},
-		
+
+		},
+		onHide() {
+			if (this.innerAudioContext) {
+				this.innerAudioContext.stop()
+			}
+		},
+		destroyed() {
+			if (this.innerAudioContext) {
+				this.innerAudioContext.stop()
+			}
 		},
 		onShow() {
 			staticDetail({
 				memorial_id: this.id
 			}, (res) => {
 				this.info = res.data
-				console.log(this.info)
 				this.list[0].num = res.data.actions.jx
 				this.list[1].num = res.data.actions.lz
 				this.list[2].num = res.data.actions.hq
 				this.list[3].num = res.data.actions.sm
-			
 			})
 		},
 		onLoad(ops) {
 			this.id = ops.id
 		},
 		components: {
-			worship
+			// worship
+		},
+		watch: {
+			info(data) {
+				if (data.background_music) {
+					this.$nextTick(function() {
+						if (this.innerAudioContext) {
+							this.innerAudioContext.destroy()
+						}
+						this.innerAudioContext = uni.createInnerAudioContext();
+						this.innerAudioContext.autoplay = true;
+						this.innerAudioContext.loop = true;
+						this.innerAudioContext.src = data.background_music
+						// this.innerAudioContext.src = 'http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_149779983&response=res&type=convert_url&'
+						this.is_play = true
+						this.YY = yy
+					})
+
+				}
+				this.type = data.cover_image_type
+
+				switch (this.type) {
+					case 1:
+						this.bgImg = imaga64.bg1;
+						this.imgTop = 225;
+						this.infotop = 425;;
+						this.leftBtn = '#3D3E4E';
+						break;
+					case 2:
+						this.bgImg = imaga64.bg2;
+						this.imgTop = 140;
+						this.infotop = 350;;
+						this.leftBtn = 'rgba(50,79,121,.8)';
+						break;
+					case 3:
+						this.bgImg = imaga64.bg3;
+						this.imgTop = 225;
+						this.infotop = 500;
+						this.leftBtn = '#3D3E4E';
+						break;
+					default:
+						this.bgImg = imaga64.bg1;
+						this.imgTop = 225;
+						this.infotop = 425;;
+						this.leftBtn = '#3D3E4E';
+						break;
+				}
+			}
 		}
 	};
 </script>
 
 <style lang="scss">
+	@-webkit-keyframes animal {
+		0% {
+			transform: rotate(-360deg);
+			-ms-transform: rotate(-360deg);
+			-webkit-transform: rotate(-360deg);
+		}
+
+		100% {
+			transform: rotate(0deg);
+			-ms-transform: rotate(0deg);
+			-webkit-transform: rotate(0deg);
+		}
+	}
+
+	.worship_header {
+		width: 100%;
+		height: 700rpx;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		position: relative;
+
+		.top_btn {
+			display: flex;
+			box-sizing: border-box;
+			padding: 25rpx 50rpx;
+			width: 100%;
+			justify-content: space-between;
+
+			.active_yy {
+				-webkit-animation: animal 3s infinite linear;
+				-webkit-transform-origin: center center;
+				-ms-transform-origin: center center;
+				transform-origin: center center;
+			}
+
+			.fx_num {
+				margin-top: 10rpx;
+				font-size: 29rpx;
+				text-align: center;
+				color: #fff;
+			}
+
+			image {
+				display: block;
+				margin: 0 auto;
+				width: 65rpx;
+				height: 65rpx;
+			}
+		}
+
+		.left_col {
+			margin-left: 20rpx;
+
+			.left_col_row {
+				width: 150rpx;
+				height: 83rpx;
+				display: flex;
+				align-items: center;
+				color: #fff;
+				font-size: 28rpx;
+				// background-color: #;
+				border-radius: 6px;
+				margin-top: 20rpx;
+				box-sizing: border-box;
+				padding: 0 20rpx 0 10rpx;
+				justify-content: space-between;
+
+				image {
+					width: 55rpx;
+					height: 55rpx;
+				}
+			}
+		}
+
+		.icon,
+		.info {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		.icon {
+			// top: 225rpx;
+			width: 165rpx;
+			height: 195rpx;
+		}
+
+		.info {
+			// top: 500rpx;
+			text-align-last: center;
+			color: #fff;
+
+			.name {
+				font-size: 32rpx;
+			}
+
+			.sex {
+				font-size: 24rpx;
+				margin: 2rpx 0;
+			}
+
+			.time {
+				font-size: 30rpx;
+			}
+		}
+	}
+
 	.pensive_home {
 		height: 100vh;
 		box-sizing: border-box;
@@ -262,8 +479,7 @@
 			bottom: 0;
 			left: 0;
 			border-top: 1px solid #F5F5F5;
-
-			.btn {
+			.send_grief_btn {
 				text-align: center;
 				color: #fff;
 				background-color: #FF9E13;

@@ -1,0 +1,1 @@
+<view class="{{[node.classStr]}}" style="{{(node.styleStr)}}"><video class="{{['video-video',node.classStr]}}" src="{{node.attr.src}}" data-event-opts="{{[['play',[['v_play',['$event']]]],['pause',[['v_pause',['$event']]]],['ended',[['v_ended',['$event']]]]]}}" bindplay="__e" bindpause="__e" bindended="__e"></video></view>

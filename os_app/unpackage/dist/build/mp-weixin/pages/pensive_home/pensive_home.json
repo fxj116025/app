@@ -1,7 +1,5 @@
 {
   "navigationBarTitleText": "寄哀思",
   "enablePullDownRefresh": false,
-  "usingComponents": {
-    "worship": "/components/worship_header/worship_header"
-  }
+  "usingComponents": {}
 }

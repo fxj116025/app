@@ -26,16 +26,14 @@
 
 		<!-- 菜单 -->
 		<uni-list>
-			<uni-list-item ellipsis='1'
-				thumb='/static/images/fx2.png'
-				:clickable='true' :title="'福星：'+info.bless" to='../lucky_star/lucky_star'>
+			<uni-list-item ellipsis='1' thumb='/static/images/fx2.png' :clickable='true' :title="'福星：'+info.bless"
+				to='../lucky_star/lucky_star'>
 				<view class="go_look" slot='footer'>
 					去看看
 				</view>
 			</uni-list-item>
-			<uni-list-item ellipsis='1'
-				thumb='/static/images/my_gz.png'
-				:clickable='true' title="我关注的纪念馆" link to='../attention/attention' />
+			<uni-list-item ellipsis='1' thumb='/static/images/my_gz.png' :clickable='true' title="我关注的纪念馆" link
+				to='../attention/attention' />
 		</uni-list>
 	</view>
 </template>
@@ -51,7 +49,7 @@
 				sign_num: 0,
 				lucky_star_num: 0,
 				info: null,
-				is_look:false
+				is_look: false
 			}
 		},
 		mounted() {
@@ -62,20 +60,25 @@
 			getUserInfo() {
 				userInfo({}, (res) => {
 					this.info = res.data
-					this.is_look=true
+					this.is_look = true
 				})
 			},
 			//签到
-			sign(){
-				let sendData={
-					job_name:'qd'
+			sign() {
+				let sendData = {
+					job_name: 'qd'
 				}
-				execJobs(sendData,(res)=>{
-					console.log(res)
-					this.getUserInfo()
+				execJobs(sendData, (res) => {
+					this.info.sign_days += 1
+					uni.showToast({
+						title: '签到成功',
+						icon: 'none',
+						duration: 2000
+					})
 				})
 			}
-		}
+		},
+
 	}
 </script>
 

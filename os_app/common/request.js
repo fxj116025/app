@@ -7,7 +7,7 @@
 const APP_URL = 'https://t.mem.wmys9.com'
 
 //GET请求封装
-function getRequest(url, data) {
+function getRequest(url, data, no_toast) {
 	return promise = new Promise((resolve, reject) => {
 		let postData = data;
 		if (uni.getStorageSync('token')) {
@@ -25,11 +25,13 @@ function getRequest(url, data) {
 				if (res.statusCode === 200 && res.data.code === 1) {
 					resolve(res.data);
 				} else {
-					uni.showToast({
-						title: res.data.msg || '请求失败',
-						icon: 'none',
-						duration: 2000
-					})
+					if (!no_toast) {
+						uni.showToast({
+							title: res.data.msg || '请求失败',
+							icon: 'none',
+							duration: 2000
+						})
+					}
 				}
 			},
 			error: function(e) {
@@ -45,11 +47,14 @@ function getRequest(url, data) {
 
 
 //post请求封装
-function postRequest(url, data) {
-	uni.showLoading({
-		title: '加载中',
-		mask: true
-	});
+function postRequest(url, data, no_toast) {
+	if(!no_toast){
+		uni.showLoading({
+			title: '加载中',
+			mask: true
+		});
+	}
+	
 	return new Promise((resolve, reject) => {
 		var postData = data;
 		if (uni.getStorageSync('token')) {
@@ -63,16 +68,27 @@ function postRequest(url, data) {
 				'content-type': 'application/x-www-form-urlencoded',
 			},
 			success: function(res) {
-				uni.hideLoading()
+				if (!no_toast) {
+					uni.hideLoading()
+				}
 				if (res.statusCode === 200 && res.data.code === 1) {
 					resolve(res.data);
 				} else {
-					if (url != '/user/execJobs') {
+					console.log(url + ':' + no_toast)
+					if (!no_toast) {
 						uni.showToast({
 							title: res.data.msg || '请求失败',
 							icon: 'none',
 							duration: 2000
 						})
+					} else {
+						if (postData.job_name == 'qd' && res.data.code === 0) {
+							uni.showToast({
+								title: '你已经签到过了',
+								icon: 'none',
+								duration: 2000
+							})
+						}
 					}
 				}
 			},

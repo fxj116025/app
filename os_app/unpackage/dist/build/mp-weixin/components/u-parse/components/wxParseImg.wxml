@@ -1,0 +1,1 @@
+<image class="{{[node.classStr]}}" style="{{(newStyleStr||node.styleStr)}}" lazy-load="{{node.attr.lazyLoad}}" data-src="{{node.attr.src}}" src="{{node.attr.src}}" data-event-opts="{{[['tap',[['wxParseImgTap',['$0'],['node.attr.src']]]],['load',[['wxParseImgLoad',['$event']]]]]}}" bindtap="__e" bindload="__e"></image>

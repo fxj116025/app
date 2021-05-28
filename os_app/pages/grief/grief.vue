@@ -148,9 +148,9 @@
 			},
 			// 寄哀思
 			sendGrief() {
-				if (!this.grief) {
+				if (!this.grief&&this.pitchoOblation.length===0) {
 					uni.showToast({
-						title: '请填写寄语',
+						title: '请选择祭品或留言',
 						icon: 'none',
 						duration: 2000
 					})
@@ -164,17 +164,20 @@
 					}
 
 				memorialSorrow(sendData, (res) => {
-					console.log(res)
+					// console.log(res)
 					uni.showToast({
 						title: '留言成功',
 						icon: 'none',
 						duration: 2000
 					})
-					execJobs({
-						job_name: 'jax'
-					}, (res) => {
-						console.log(res)
-					})
+					if (this.pitchoOblation.length > 0) {
+						execJobs({
+							job_name: 'jb'
+						}, (res) => {
+							console.log(res)
+						})
+					}
+
 					setTimeout(() => {
 						uni.navigateBack({
 							delta: 1

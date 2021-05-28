@@ -25,7 +25,7 @@
 						今日已获得福星：
 					</view>
 					<view class="integral_num">
-						{{list.user_bless}}
+						{{toDay_num}}
 					</view>
 				</view>
 			</uni-list-item>
@@ -64,7 +64,7 @@
 						<text v-if="i=='fx'">去分享</text>
 						<text v-if="i=='gz'">未完成</text>
 						<text v-if="i=='jb'">去寄语</text>
-						<text v-if="i=='yqhy'">去观看</text>
+						<text v-if="i=='yqhy'">去邀请</text>
 						<text v-if="i=='qd'">去签到</text>
 					</view>
 				</view>
@@ -141,7 +141,8 @@
 		userInfo,
 		recharge,
 		getPayConf,
-		execJobs
+		execJobs,
+		qr_code
 	} from '../../common/http.js'
 	export default {
 		data() {
@@ -269,6 +270,58 @@
 							url: '../memorial_hall/memorial_hall'
 						})
 						break;
+					case 'qd':
+						uni.navigateTo({
+							url: '../personalCenter/personalCenter'
+						})
+						break;
+					case 'yqhy':
+						let sendData = {
+							page: 'pages/index/index?uid=' + uni.getStorageSync('user_id'),
+							width: '300',
+						}
+						qr_code(sendData, (res) => {
+							uni.downloadFile({
+								url: res.data.qrcode_url,
+								success(img_res) {
+									if (img_res.statusCode === 200) {
+										let path = img_res.tempFilePath
+										uni.saveImageToPhotosAlbum({
+											filePath: path,
+											success(down_res) {
+												uni.showToast({
+													title: '二维码保存成功',
+													duration: 2000,
+													icon: 'success'
+												})
+											},
+											fail(req) {
+												uni.showToast({
+													title: '操作失败',
+													duration: 2000,
+													icon: 'none'
+												})
+											}
+										})
+									} else {
+										uni.showToast({
+											title: '操作失败',
+											duration: 2000,
+											icon: 'none'
+										})
+									}
+								},
+								fail(req) {
+									uni.showToast({
+										title: '操作失败',
+										duration: 2000,
+										icon: 'none'
+									})
+								}
+							})
+
+						})
+						break;
 					default:
 						break;
 				}
@@ -299,6 +352,13 @@
 					s += '0';
 				}
 				return s
+			},
+			toDay_num() {
+				let num = 0
+				for (let i in this.list.user_jobs) {
+					num += Number(this.list.user_jobs[i].everyday_obtained_bless)
+				}
+				return num
 			}
 		}
 	}

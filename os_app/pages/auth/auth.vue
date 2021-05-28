@@ -23,23 +23,26 @@
 		data() {
 			return {
 				canIUse: true,
-				code:''
+				code: '',
+				share_user_id: '',
+				enter_type: '',
+				p_id:''
 			};
 		},
 		methods: {
 			bindGetUserInfo() {
-				let _this=this
-				
+				let _this = this
+
 				uni.getSetting({
-					success(res){
+					success(res) {
 						console.log(res)
 					},
-					fail(req){
+					fail(req) {
 						console.log('失败')
 						console.log(req)
 					}
 				})
-				
+
 				uni.getUserProfile({
 					desc: '您的公开信息（昵称、头像等）',
 					success(res) {
@@ -48,19 +51,32 @@
 							signature: res.signature,
 							rawData: res.rawData,
 							encryptedData: res.encryptedData,
-							iv: res.iv
+							iv: res.iv,
+							share_user_id: _this.share_user_id,
+							enter_type: _this.enter_type
 						}
 						login(sendData, (res) => {
 							uni.setStorageSync('userInfo', res.data.userinfo);
+							uni.setStorageSync('user_id', res.data.userinfo.user_id);
 							uni.setStorageSync('token', res.data.userinfo.token);
 							uni.showToast({
 								title: '登陆成功',
 								icon: 'success',
 								duration: 2000
 							})
-							uni.reLaunch({
-								url:'../index/index'
-							})
+							// if(_this.share_user_id){
+
+							// }
+							if(_this.p_id){
+								uni.reLaunch({
+									url: '../index/index?gid='+_this.p_id
+								})
+							}else{
+								uni.reLaunch({
+									url: '../index/index'
+								})
+							}
+							
 						})
 					},
 					fail(req) {
@@ -73,13 +89,19 @@
 				})
 
 			},
-			onLoad() {
-				
+			onLoad(ops) {
+				if (ops.uid) {
+					this.share_user_id = ops.uid
+				}
+				if(ops.gid){
+					this.p_id= ops.gid
+				}
 				uni.login({
 					success: (info) => {
-						this.code=info.code
+						this.code = info.code
 					}
 				})
+
 			}
 		},
 	}

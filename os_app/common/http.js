@@ -47,7 +47,7 @@ function userInfo(data,callback){
 
 // 任务公共接口
 function execJobs(data,callback){
-	postRequest('/user/execJobs', data).then((res) => {
+	postRequest('/user/execJobs', data,true).then((res) => {
 		callback(res)
 	})
 }
@@ -114,6 +114,12 @@ function recharge(data,callback){
 	})
 }
 
+// 二维码
+function qr_code(data,callback){
+	postRequest('/memorial/getShareQRcode', data).then((res) => {
+		callback(res)
+	})
+}
 
 
 
@@ -134,5 +140,6 @@ export {
 	userMyFocus,
 	memorialAction,
 	recharge,
-	getPayConf
+	getPayConf,
+	qr_code
 }
